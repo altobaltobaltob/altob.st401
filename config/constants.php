@@ -46,7 +46,7 @@ define('PKS_PIC', FILE_BASE.'pks/pics/');				// 車輛入車格照片存檔路�
 
 define('EXPORT_BASE', '/home/data/export/');			// 檔案匯出根路徑  
    
-define('STATION_NAME', '異常：請通知總公司');			// 本場站名稱
+define('STATION_NAME', '異常：請通知總公司設定');		// 本場站名稱
 define('STATION_NO', 54321);							// 本場站編號
 define('STATION_IP', '192.168.0.201');					// 本場站IP
 define('STATION_URL', 'http://'.STATION_IP.'/');		// 本場站URL
