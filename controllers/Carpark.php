@@ -507,7 +507,20 @@ class Carpark extends CI_Controller
 		passthru('/usr/bin/tail -n ' . $lines . '  ' . LOG_FILE);		// 利用linux指令顯示倒數幾行的logs內容 
         echo "\n----- " . LOG_FILE . ' -----';   
         echo '</pre></body></html>';
-	}    
+	}   
+
+	// 顯示 cars 888 logs
+	public function show_cars_888_logs()
+	{             
+        $lines = $this->uri->segment(3);	// 顯示行數
+        if (empty($lines)) $lines = 40;		// 無行數參數, 預設為40行
+    	$log_path = '/home/data/parkings/cars/logs/cars.' . date('Ymd').'.log.txt';
+        // echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body><pre style="white-space: pre-wrap;">';
+        echo '<html lang="zh-TW"><body><pre style="white-space: pre-wrap;">';
+		passthru('/usr/bin/tail -n ' . $lines . ' ' . $log_path . '|grep 888');
+        echo "\n----- " . $log_path . ' -----';   
+        echo '</pre></body></html>';
+	}  	
 	
     
     // 新增月租資料
