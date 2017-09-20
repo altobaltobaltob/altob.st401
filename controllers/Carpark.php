@@ -513,7 +513,10 @@ class Carpark extends CI_Controller
 	public function show_cars_888_logs()
 	{             
         $lines = $this->uri->segment(3);	// 顯示行數
-        if (empty($lines)) $lines = 40;		// 無行數參數, 預設為40行
+        if (empty($lines)) $lines = 1000;	// 無行數參數, 預設為1000行
+		
+		if($lines > 20000) $lines = 20000;	// 最多找20000行
+		
     	$log_path = '/home/data/parkings/cars/logs/cars.' . date('Ymd').'.log.txt';
         // echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body><pre style="white-space: pre-wrap;">';
         echo '<html lang="zh-TW"><body><pre style="white-space: pre-wrap;">';
