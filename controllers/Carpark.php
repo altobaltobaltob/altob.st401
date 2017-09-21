@@ -100,6 +100,12 @@ class Carpark extends CI_Controller
     	header('Last-Modified: '.gmdate('D, d M Y H:i:s', $last_modified_time).' GMT');
         header('Etag: '. APP_VERSION);
 		header('Cache-Control: public'); 
+		
+		// 20170921
+		header("cache-Control: no-store, no-cache, must-revalidate");
+		header("cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");		
         
         if (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == APP_VERSION && @strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $last_modified_time)
     	{                  
@@ -507,23 +513,7 @@ class Carpark extends CI_Controller
 		passthru('/usr/bin/tail -n ' . $lines . '  ' . LOG_FILE);		// 利用linux指令顯示倒數幾行的logs內容 
         echo "\n----- " . LOG_FILE . ' -----';   
         echo '</pre></body></html>';
-	}   
-
-	// 顯示 cars 888 logs
-	public function show_cars_888_logs()
-	{             
-        $lines = $this->uri->segment(3);	// 顯示行數
-        if (empty($lines)) $lines = 1000;	// 無行數參數, 預設為1000行
-		
-		if($lines > 20000) $lines = 20000;	// 最多找20000行
-		
-    	$log_path = '/home/data/parkings/cars/logs/cars.' . date('Ymd').'.log.txt';
-        // echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body><pre style="white-space: pre-wrap;">';
-        echo '<html lang="zh-TW"><body><pre style="white-space: pre-wrap;">';
-		passthru('/usr/bin/tail -n ' . $lines . ' ' . $log_path . '|grep 888');
-        echo "\n----- " . $log_path . ' -----';   
-        echo '</pre></body></html>';
-	}  	
+	}    
 	
     
     // 新增月租資料
