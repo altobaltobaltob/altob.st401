@@ -507,7 +507,8 @@ class Carpark extends CI_Controller
 	{             
         $lines = $this->uri->segment(3);	// 顯示行數
         if (empty($lines)) $lines = 140;		// 無行數參數, 預設為40行
-    	
+    	if($lines > 1000)  $lines = 1000;		// 最多 1000行
+		
         // echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body><pre style="white-space: pre-wrap;">';
         echo '<html lang="zh-TW"><body><pre style="white-space: pre-wrap;">';      
        
@@ -517,7 +518,7 @@ class Carpark extends CI_Controller
 	}
 	
 	// 顯示logs (cars grep 888)
-	public function show_cars_888_logs()
+	public function show_888_logs()
 	{             
         $lines = $this->uri->segment(3);	// 顯示行數
         if (empty($lines)) $lines = 1000;		// 無行數參數, 預設為1000行

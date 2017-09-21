@@ -123,7 +123,8 @@ class Cars extends CI_Controller
 	{             
         $lines = $this->uri->segment(3);	// 顯示行數
         if (empty($lines)) $lines = 140;		// 無行數參數, 預設為40行
-    	
+    	if($lines > 1000)  $lines = 1000;		// 最多 1000行
+		
         // echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body><pre style="white-space: pre-wrap;">';
         echo '<html lang="zh-TW"><body><pre style="white-space: pre-wrap;">';      
        
@@ -131,6 +132,24 @@ class Cars extends CI_Controller
         echo "\n----- " . LOG_PATH.APP_NAME . '.' . date('Ymd').'.log.txt' . ' -----';   
         echo '</pre></body></html>';
 	}
+	
+	// 顯示logs (grep 888)
+	public function show_888_logs()
+	{             
+        $lines = $this->uri->segment(3);	// 顯示行數
+        if (empty($lines)) $lines = 1000;		// 無行數參數, 預設為1000行
+		if($lines > 20000)  $lines = 20000;		// 最多 20000行
+    	
+		$grep_str = ' |grep 888';
+		$target_str = LOG_PATH.APP_NAME . '.' . date('Ymd').'.log.txt'. $grep_str;
+		
+        // echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body><pre style="white-space: pre-wrap;">';
+        echo '<html lang="zh-TW"><body><pre style="white-space: pre-wrap;">';      
+       
+		passthru('/usr/bin/tail -n ' . $lines . '  ' . $target_str);	// 利用linux指令顯示倒數幾行的logs內容 
+        echo "\n----- " . $target_str . ' -----';   
+        echo '</pre></body></html>';
+	}    
 	
 	/*
 		出入口
