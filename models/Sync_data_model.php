@@ -84,8 +84,8 @@ class Sync_data_model extends CI_Model
 			$last_cars_tmp = $cars_tmp_log_arr[$new_cars_tmp['sno_io']];
 			
 			// 判斷是否跳過 (記錄於一小時內, 相同場站進出 lpr 或 etag)
-			if(	($last_cars_tmp['lpr'] == $new_cars_tmp['lpr'] || 
-				$last_cars_tmp['etag'] == $new_cars_tmp['etag'])	&& $last_cars_tmp['timestamp'] > $new_cars_tmp['timestamp'] - 3600
+			if(	( 	($last_cars_tmp['lpr'] == $new_cars_tmp['lpr'] && $last_cars_tmp['lpr'] != 'NONE')	|| 
+					($last_cars_tmp['etag'] == $new_cars_tmp['etag'] && $last_cars_tmp['etag'] != 'NONE')	)	&& $last_cars_tmp['timestamp'] > $new_cars_tmp['timestamp'] - 3600
 			)
 				$skip_or_not = true;
 		}
