@@ -341,7 +341,23 @@ class Carpark extends CI_Controller
 	//
 	// ------------------------------------------------
 	
-	
+	// 政府機關同步
+	public function sync_gov()
+	{
+		// 取得 888 現況
+		$data = $this->carpark_model->pks_group_query();
+		
+		foreach($data as $rows)
+        {
+			if($rows['group_id'] == 'C888')
+			{
+				trigger_error(__FUNCTION__ . "{$rows['group_id']}|{$rows['tot']}|{$rows['availables']}");
+			}
+		}
+		
+		echo 'ok';
+		exit;
+	}
 	
 	
 	// [START] 2016/06/03 登入
