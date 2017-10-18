@@ -240,7 +240,7 @@ class Carpark extends CI_Controller
 			exit;
 		}
 		
-        $data = $this->carpark_model->get_last_unbalanced_cario($lpr, $station_no);
+        $data = $this->sync_data_model->get_last_unbalanced_cario($lpr, $station_no);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
 	}
 	

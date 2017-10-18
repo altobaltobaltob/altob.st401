@@ -448,12 +448,12 @@ class Sync_data_model extends CI_Model
 	}
 	
 	// 取得最新未結清 （功能: 行動支付）
-	public function get_last_unbalanced_cario($lpr) 
+	public function get_last_unbalanced_cario($lpr, $station_no) 
 	{                    
 		$sql = "SELECT station_no, cario_no, in_time, pay_time, out_time, out_before_time, member_no
 					FROM cario 
 				WHERE 
-					obj_id = '{$lpr}' AND finished = 0 AND err = 0
+					station_no = '{$station_no}' AND obj_id = '{$lpr}' AND finished = 0 AND err = 0
 				ORDER BY cario_no DESC
 				LIMIT 1
 				";
