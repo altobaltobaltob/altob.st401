@@ -49,6 +49,9 @@ class Cars extends CI_Controller
         	ob_end_clean();
 			ignore_user_abort();
 			ob_start();
+			
+			echo 'ok';
+			
 			header('Connection: close');
 			header('Content-Length: ' . ob_get_length());
 			ob_end_flush();
